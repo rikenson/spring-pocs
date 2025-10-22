@@ -1,0 +1,60 @@
+startDateTime:
+  in: query
+  name: startDateTime
+  description: Fields to consider to filter by start datetime.
+  required: false
+  schema:
+    type: string
+    format: date-time
+    example: 2017-07-21T17:32:28.000Z
+
+endDateTime:
+  in: query
+  name: endDateTime
+  description: Fields to consider to filter by ended datetime.
+  required: false
+  schema:
+    type: string
+    format: date-time
+    example: 2017-07-21T17:32:28.000Z
+
+preferredField:
+  in: query
+  name: preferredField
+  description: Fields to consider to order the elements.
+  required: false
+  schema:
+    type: string
+    example: id
+    default: id
+
+status:
+  in: query
+  name: status
+  description: Fields to consider status.
+  required: false
+  schema:
+    type: string
+    default: PENDING
+    enum:
+      - ENDED
+      - STARTED
+      - CANCELED
+      - PENDING
+id:
+  in: path
+  name: id
+  description: Current entity ID.
+  required: true
+  schema:
+    type: string
+    example: d815d301-8bae-4dd0-a292-56e0cb7509d6
+
+token:
+  in: header
+  name: token
+  description: security token
+  required: true
+  schema:
+    type: string
+    example: 283jebuiVIVEG&#G#UGFXVVWWVD#h3dndon3j0d1hd119hd&ywyw^YS

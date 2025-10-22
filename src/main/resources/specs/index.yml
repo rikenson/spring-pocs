@@ -1,0 +1,113 @@
+openapi: 3.0.3
+servers:
+  - url: "https://{environment}.api.mendoz.labs:{port}/{basePath}"
+    description: API Server
+    variables:
+      environment:
+        enum:
+          - dev
+          - stg
+          - prod
+        default: dev
+        description: Server environment
+      port:
+        enum:
+          - '4000'
+          - '8080'
+        default: '8080'
+      basePath:
+        default: api/v1
+
+info:
+  title: Client Management API
+  version: 1.0.0
+  description: RESTful API for client management operations
+  termsOfService: https://mendoz.labs/terms/apis/
+  contact:
+    name: API Support
+    email: api-support@mendoz.labs
+    url: https://mendoz.labs/support
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+tags:
+  - name: clients
+    description: Client management operations
+paths:
+  /clients/search:
+    $ref: "./paths/clients.yml#/search"
+  /clients/search-one:
+    $ref: "./paths/clients.yml#/searchOne"
+  /clients/{id}:
+    $ref: "./paths/clients.yml#/byId"
+  
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    OAuth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://auth.mendoz.labs/oauth/authorize
+          tokenUrl: https://auth.mendoz.labs/oauth/token
+          scopes:
+            read:clients: Read client information
+            write:clients: Create and update clients
+            delete:clients: Delete clients
+  parameters:
+    $ref: "./params/common.yml"
+  schemas:
+    # Base models
+    IDModel:
+      $ref: "./schemas/base-models.yml#/IDModel"
+    AuditModel:
+      $ref: "./schemas/base-models.yml#/AuditModel"
+    Sort:
+      $ref: "./schemas/base-models.yml#/Sort"
+    Pageable:
+      $ref: "./schemas/base-models.yml#/Pageable"
+    PageableExtra:
+      $ref: "./schemas/base-models.yml#/PageableExtra"
+    AbstractPage:
+      $ref: "./schemas/base-models.yml#/AbstractPage"
+    BaseResponseModel:
+      $ref: "./schemas/base-models.yml#/BaseResponseModel"
+    # Client models
+    ClientSummaryDto:
+      $ref: "./schemas/client.yml#/ClientSummaryDto"
+    ClientSummaryFilter:
+      $ref: "./schemas/client.yml#/ClientSummaryFilter"
+    ExternalReference:
+      $ref: "./schemas/client.yml#/ExternalReference"
+    ClientPage:
+      $ref: "./schemas/client.yml#/ClientPage"
+  responses:
+    BadRequest:
+      description: Bad request - Invalid input parameters
+      content:
+        application/json:
+          schema:
+            $ref: "./schemas/errors.yml#/ErrorResponse"
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: "./schemas/errors.yml#/ErrorResponse"
+    InternalServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "./schemas/errors.yml#/ErrorResponse"
+
+security:
+  - BearerAuth: []

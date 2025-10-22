@@ -1,0 +1,62 @@
+# Application Configuration
+APP_NAME: pocs-confluent
+SERVER_PORT: 4000
+
+# MongoDB Configuration
+MONGODB_HOST: localhost
+MONGODB_PORT: 27017
+MONGODB_USERNAME: dev
+MONGODB_PASSWORD: s3cr3t
+MONGODB_DATABASE: pocs_db
+MONGODB_AUTH_DB: pocs_db
+
+# Confluent Cloud Kafka Configuration
+CONFLUENT_BOOTSTRAP_SERVERS: localhost:9093
+CONFLUENT_GROUP_ID: pocs-consumer-group
+CONFLUENT_API_KEY: admin
+CONFLUENT_API_SECRET: s3cr3t
+CONFLUENT_TRUSTSTORE_LOCATION: ${HOME}/wrkspace/ops/local.env/certs/kafka.keystore.jks
+CONFLUENT_TRUSTSTORE_PASSWORD: kafka-secret
+CONFLUENT_SKIP_HOSTNAME_VERIFICATION: "true"
+CONFLUENT_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM: ""
+CONFLUENT_SECURITY_PROTOCOL: SASL_PLAINTEXT
+CONFLUENT_SASL_MECHANISM: PLAIN
+CONFLUENT_SECURITY_ENABLED: "true"
+# SSL specific configurations for local development
+CONFLUENT_SSL_TRUSTSTORE_TYPE: JKS
+CONFLUENT_SSL_CHECK_HOSTNAME: "false"
+CONFLUENT_AUTO_OFFSET_RESET: earliest
+CONFLUENT_ENABLE_AUTO_COMMIT: "false"
+CONFLUENT_SESSION_TIMEOUT: 30s
+CONFLUENT_HEARTBEAT_INTERVAL: 3s
+CONFLUENT_MAX_POLL_RECORDS: 500
+CONFLUENT_MAX_POLL_INTERVAL: 5m
+CONFLUENT_RECONNECT_BACKOFF: 50ms
+CONFLUENT_RETRY_BACKOFF: 100ms
+CONFLUENT_REQUEST_TIMEOUT: 30000
+CONFLUENT_KEY_DESERIALIZER: org.apache.kafka.common.serialization.StringDeserializer
+CONFLUENT_VALUE_DESERIALIZER: org.apache.kafka.common.serialization.StringDeserializer
+
+
+# Kafka Topics General Configuration
+TOPIC_AUTO_SUBSCRIBE: "true"
+
+# Clients Kafka Client Topics Configuration
+CLIENTS_TOPIC_NAME: clientsTopic
+CLIENTS_TOPIC_GROUP_ID: pocs-clients-group
+
+# Accounts Kafka Client Topics Configuration
+ACCOUNTS_TOPIC_NAME: accountsTopic
+ACCOUNTS_TOPIC_GROUP_ID: pocs-accounts-group
+
+# Users Kafka Client Topics Configuration
+USERS_TOPIC_NAME: usersTopic
+USERS_TOPIC_GROUP_ID: pocs-users-group
+
+# Log Offsets Kafka Client Topics Configuration
+LOG_OFFSET_TOPIC_NAME: logOffsetsTopic
+LOG_OFFSET_TOPIC_GROUP_ID: pocs-logOffsets-group
+
+# User Access Kafka Client Topics Configuration
+USER_ACCESS_TOPIC_NAME: userAccessTopic
+USER_ACCESS_TOPIC_GROUP_ID: pocs-userAccess-group

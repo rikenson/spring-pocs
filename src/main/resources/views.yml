@@ -1,0 +1,45 @@
+- viewName: clientSummaryView
+  sourceCollection: clients
+  targetCollection: client_summary_view
+  aggregationPipeline: |
+    [
+      {
+        "$project": {
+          "_id": 1,
+          "clientName": 1,
+          "version": 1,
+          "clientNumber": 1,
+          "lastUpdateUserId": 1,
+          "deleted": 1,
+          "externalReferences": 1,
+          "isUpdated": { "$gt": ["$version", 1] }
+        }
+      }
+    ]
+  refreshSchedule: "0 */1 * * * *"
+  createIndexes: false
+  indexes: []
+
+- viewName: clientCountView
+  sourceCollection: clients
+  targetCollection: client_count_view
+  aggregationPipeline: |
+    [
+      {
+        "$group": {
+          "_id": null,
+          "clientCount": { "$sum": 1 },
+          "lastUpdated": { "$max": "$$NOW" }
+        }
+      },
+      {
+        "$project": {
+          "_id": 0,
+          "clientCount": 1,
+          "lastUpdated": 1
+        }
+      }
+    ]
+  refreshSchedule: "0 */2 * * * *"
+  createIndexes: false
+  indexes: []

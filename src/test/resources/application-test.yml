@@ -1,0 +1,32 @@
+# Test configuration - disable external connections
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  kafka:
+    bootstrap-servers: # Completely unset to disable @ConditionalOnProperty
+  data:
+    mongodb:
+      uri: # Completely unset
+
+# Completely disable Kafka configuration by NOT setting bootstrap-servers
+# This will prevent @ConditionalOnProperty(prefix = "kafka", name = "bootstrap-servers") from triggering
+kafka:
+  # bootstrap-servers: # COMMENTED OUT - this disables all Kafka beans
+  topics:
+    clients: "test-clients-topic"
+    accounts: "test-accounts-topic"
+    users: "test-users-topic"
+    user-access: "test-user-access-topic"
+    log-offset: "test-log-offset-topic"
+
+logging:
+  level:
+    org.apache.kafka: ERROR
+    org.springframework.kafka: ERROR
+    org.springframework.data.mongodb: ERROR
+    reactor.kafka: ERROR
+    com.tiger.pocs.kafka: ERROR
+    root: WARN

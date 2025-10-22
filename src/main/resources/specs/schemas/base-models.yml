@@ -1,0 +1,155 @@
+IDModel:
+  type: object
+  title: IDModel
+  required:
+    - currentId
+  properties:
+    currentId:
+      type: integer
+      format: int64
+      example: 1
+
+AuditModel:
+  type: object
+  title: AuditModel
+  required:
+    - createdAt
+    - modifiedAt
+    - createdBy
+    - modifiedBy
+  properties:
+    createdAt:
+      type: string
+      format: date-time
+      example: 2017-07-21T17:32:28.000Z
+      description: Timestamp when the resource was created
+    modifiedAt:
+      type: string
+      format: date-time
+      example: 2017-07-21T17:32:28.000Z
+      description: Timestamp when the resource was last modified
+    createdBy:
+      type: string
+      example: b815d301-8bae-4dd0-a292-56e0cb7509d5
+      description: ID of the user who created the resource
+    modifiedBy:
+      type: string
+      example: b815d301-8bae-4dd0-a292-56e0cb7509d5
+      description: ID of the user who last modified the resource
+
+Sort:
+  type: object
+  title: Sort
+  required:
+    - sorted
+    - unsorted
+    - empty
+  properties:
+    sorted:
+      type: boolean
+      example: false
+    unsorted:
+      type: boolean
+      example: true
+    empty:
+      type: boolean
+      example: true
+
+Pageable:
+  type: object
+  title: Pageable
+  required:
+    - sort
+    - pageNumber
+    - pageSize
+    - offset
+    - paged
+    - unpaged
+  properties:
+    sort:
+      $ref: '#/Sort'
+    pageNumber:
+      type: integer
+      format: int64
+      example: 0
+    pageSize:
+      type: integer
+      format: int64
+      example: 0
+    offset:
+      type: integer
+      format: int64
+      example: 0
+    paged:
+      type: boolean
+      example: true
+    unpaged:
+      type: boolean
+      example: true
+
+PageableExtra:
+  type: object
+  title: PageableExtra
+  required:
+    - totalElements
+    - totalPages
+    - last
+    - numberOfElements
+    - sort
+    - size
+    - number
+    - first
+    - empty
+  properties:
+    totalElements:
+      type: integer
+      format: int64
+      example: 0
+    totalPages:
+      type: integer
+      format: int64
+      example: 0
+    last:
+      type: boolean
+      example: false
+    numberOfElements:
+      type: integer
+      format: int64
+      example: 0
+    sort:
+      $ref: '#/Sort'
+    size:
+      type: integer
+      format: int64
+      example: 0
+    number:
+      type: integer
+      format: int64
+      example: 0
+    first:
+      type: boolean
+      example: true
+    empty:
+      type: boolean
+      example: false
+
+
+AbstractPage:
+  allOf:
+    - $ref: '#/PageableExtra'
+    - type: object
+      title: AbstractPage
+      required:
+        - pageable
+      properties:
+        pageable:
+          $ref: '#/Pageable'
+
+
+
+BaseResponseModel:
+  allOf:
+    - $ref: '#/IDModel'
+    - $ref: '#/AuditModel'
+    - type: object
+      title: BaseResponseModel

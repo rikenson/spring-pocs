@@ -1,0 +1,59 @@
+ErrorResponse:
+  type: object
+  title: ErrorResponse
+  description: Standard error response
+  required:
+    - timestamp
+    - status
+    - error
+    - message
+    - path
+  properties:
+    timestamp:
+      type: string
+      format: date-time
+      description: Time when the error occurred
+      example: 2023-01-01T12:00:00Z
+    status:
+      type: integer
+      format: int32
+      description: HTTP status code
+      example: 400
+    error:
+      type: string
+      description: HTTP status text
+      example: Bad Request
+    message:
+      type: string
+      description: Detailed error message
+      example: Invalid input parameters
+    path:
+      type: string
+      description: API path where the error occurred
+      example: /api/v1/clients/search
+    details:
+      type: array
+      description: Additional error details
+      items:
+        type: string
+      example: ["Field 'clientName' must not be empty"]
+
+ValidationError:
+  type: object
+  title: ValidationError
+  description: Validation error details
+  required:
+    - field
+    - message
+  properties:
+    field:
+      type: string
+      description: Field that failed validation
+      example: clientName
+    message:
+      type: string
+      description: Validation error message
+      example: Must not be empty
+    rejectedValue:
+      description: The value that was rejected
+      example: ""

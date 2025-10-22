@@ -1,0 +1,83 @@
+server:
+  port: ${SERVER_PORT}
+
+spring:
+  application:
+    name: ${APP_NAME}
+  data:
+    mongodb:
+      uri: mongodb://${MONGODB_HOST}:${MONGODB_PORT}/${MONGODB_DATABASE}
+
+logging:
+  level:
+    org.apache.kafka: WARN
+    org.apache.kafka.clients.NetworkClient: ERROR
+    org.apache.kafka.common.network.Selector: ERROR
+    reactor.kafka: WARN
+    reactor.netty: WARN
+    com.tiger.pocs.kafka: INFO
+    root: INFO
+
+
+
+kafka:
+  bootstrap-servers: ${CONFLUENT_BOOTSTRAP_SERVERS}
+  default-group-id: ${CONFLUENT_GROUP_ID}
+  security:
+    enabled: ${CONFLUENT_SECURITY_ENABLED}
+    protocol: ${CONFLUENT_SECURITY_PROTOCOL}
+    sasl-mechanism: ${CONFLUENT_SASL_MECHANISM}
+    api-key: ${CONFLUENT_API_KEY}
+    api-secret: ${CONFLUENT_API_SECRET}
+    truststore-location: ${CONFLUENT_TRUSTSTORE_LOCATION}
+    truststore-password: ${CONFLUENT_TRUSTSTORE_PASSWORD}
+    skip-hostname-verification: ${CONFLUENT_SKIP_HOSTNAME_VERIFICATION}
+    endpoint-identification-algorithm: ${CONFLUENT_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM}
+    truststore-type: ${CONFLUENT_SSL_TRUSTSTORE_TYPE}
+    check-hostname: ${CONFLUENT_SSL_CHECK_HOSTNAME}
+  producer:
+    security:
+      enabled: ${CONFLUENT_PRODUCER_SECURITY_ENABLED:${CONFLUENT_SECURITY_ENABLED}}
+      protocol: ${CONFLUENT_PRODUCER_SECURITY_PROTOCOL:${CONFLUENT_SECURITY_PROTOCOL}}
+      sasl-mechanism: ${CONFLUENT_PRODUCER_SASL_MECHANISM:${CONFLUENT_SASL_MECHANISM}}
+      api-key: ${CONFLUENT_PRODUCER_API_KEY:${CONFLUENT_API_KEY}}
+      api-secret: ${CONFLUENT_PRODUCER_API_SECRET:${CONFLUENT_API_SECRET}}
+      truststore-location: ${CONFLUENT_PRODUCER_TRUSTSTORE_LOCATION:${CONFLUENT_TRUSTSTORE_LOCATION}}
+      truststore-password: ${CONFLUENT_PRODUCER_TRUSTSTORE_PASSWORD:${CONFLUENT_TRUSTSTORE_PASSWORD}}
+      skip-hostname-verification: ${CONFLUENT_PRODUCER_SKIP_HOSTNAME_VERIFICATION:${CONFLUENT_SKIP_HOSTNAME_VERIFICATION}}
+      endpoint-identification-algorithm: ${CONFLUENT_PRODUCER_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM:${CONFLUENT_SSL_ENDPOINT_IDENTIFICATION_ALGORITHM}}
+      truststore-type: ${CONFLUENT_PRODUCER_SSL_TRUSTSTORE_TYPE:${CONFLUENT_SSL_TRUSTSTORE_TYPE}}
+      check-hostname: ${CONFLUENT_PRODUCER_SSL_CHECK_HOSTNAME:${CONFLUENT_SSL_CHECK_HOSTNAME}}
+  topics:
+    clientsTopic:
+      name: ${CLIENTS_TOPIC_NAME}
+      group-id: ${CLIENTS_TOPIC_GROUP_ID}
+      auto-subscribe: ${TOPIC_AUTO_SUBSCRIBE}
+    accountsTopic:
+      name: ${ACCOUNTS_TOPIC_NAME}
+      group-id: ${ACCOUNTS_TOPIC_GROUP_ID}
+      auto-subscribe: ${TOPIC_AUTO_SUBSCRIBE}
+    usersTopic:
+      name: ${USERS_TOPIC_NAME}
+      group-id: ${USERS_TOPIC_GROUP_ID}
+      auto-subscribe: ${TOPIC_AUTO_SUBSCRIBE}
+    logOffsetTopic:
+      name: ${LOG_OFFSET_TOPIC_NAME}
+      group-id: ${LOG_OFFSET_TOPIC_GROUP_ID}
+      auto-subscribe: ${TOPIC_AUTO_SUBSCRIBE}
+    userAccessTopic:
+      name: ${USER_ACCESS_TOPIC_NAME}
+      group-id: ${USER_ACCESS_TOPIC_GROUP_ID}
+      auto-subscribe: ${TOPIC_AUTO_SUBSCRIBE}
+  consumer:
+    key-deserializer: ${CONFLUENT_KEY_DESERIALIZER}
+    value-deserializer: ${CONFLUENT_VALUE_DESERIALIZER}
+    auto-offset-reset: ${CONFLUENT_AUTO_OFFSET_RESET}
+    enable-auto-commit: ${CONFLUENT_ENABLE_AUTO_COMMIT}
+    session-timeout: ${CONFLUENT_SESSION_TIMEOUT}
+    heartbeat-interval: ${CONFLUENT_HEARTBEAT_INTERVAL}
+    max-poll-records: ${CONFLUENT_MAX_POLL_RECORDS}
+    max-poll-interval: ${CONFLUENT_MAX_POLL_INTERVAL}
+    reconnect-backoff: ${CONFLUENT_RECONNECT_BACKOFF}
+    retry-backoff: ${CONFLUENT_RETRY_BACKOFF}
+    request-timeout: ${CONFLUENT_REQUEST_TIMEOUT}
