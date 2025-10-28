@@ -2,12 +2,8 @@ package com.tiger.pocs.tester;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.tiger.pocs.ingestion.service.PersistenceService;
 import org.springframework.data.mongodb.core.MongoTemplate;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 class PersistenceServiceTest {
 
